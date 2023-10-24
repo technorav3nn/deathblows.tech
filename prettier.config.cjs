@@ -3,6 +3,14 @@ module.exports = {
 	singleQuote: false,
 	trailingComma: "es5",
 	printWidth: 110,
-	//	plugins: ["prettier-plugin-tailwindcss"],
 	tailwindFunctions: ["tv"],
+	plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+	overrides: [
+		{
+			files: "*.astro",
+			options: {
+				parser: "astro",
+			},
+		},
+	],
 };

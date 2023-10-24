@@ -1,0 +1,87 @@
+---
+import "$styles/tailwind.css";
+import "$styles/global.css";
+import "$styles/keyframes.css";
+import Header from "$components/sections/header.astro";
+import { ViewTransitions } from "astro:transitions";
+import { SEO, type Props as SeoProps } from "astro-seo";
+import { slideFade } from "$lib/transitions";
+
+type Props = SeoProps;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- basic meta -->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<!-- view transitions -->
+		<ViewTransitions fallback="none" />
+		<!-- seo -->
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<SEO
+			{...Astro.props}
+			title="deathblows.tech - Death_Blows"
+			description="Death_Blows' Personal website"
+			openGraph={{
+				basic: { title: "Death_Blows", type: "website", url: "https://deathblows.tech", image: "" },
+				optional: {
+					description: "hi im death_blows, and i like to make things",
+					siteName: "deathblows.tech",
+				},
+			}}
+			twitter={{
+				card: "summary",
+				site: "@deathblows",
+				creator: "@deathblows",
+			}}
+		/>
+		<!-- color scheme script -->
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+					return localStorage.getItem("theme");
+				}
+				if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+					return "dark";
+				}
+				return "light";
+			})();
+
+			if (theme === "light") {
+				document.documentElement.classList.remove("dark");
+				document.documentElement.classList.add("light");
+			} else {
+				document.documentElement.classList.add("dark");
+				document.documentElement.classList.remove("light");
+			}
+
+			window.localStorage.setItem("theme", theme);
+
+			document.addEventListener("astro:after-swap", () => {
+				if (localStorage.getItem("theme") === "dark") {
+					document.documentElement.classList.add("dark");
+					document.documentElement.classList.remove("light");
+				} else {
+					document.documentElement.classList.remove("dark");
+					document.documentElement.classList.add("light");
+				}
+			});
+		</script>
+	</head>
+	<body class="min-h-screen bg-background font-sans antialiased">
+		<div class="flex min-h-screen flex-col py-8">
+			<Header />
+			<main class="flex-1">
+				<div class="container lg:max-w-[640px]">
+					<div class="pt-6">
+						<slot />
+					</div>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

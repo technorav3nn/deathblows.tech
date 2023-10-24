@@ -4,7 +4,7 @@
 		"jsx": "preserve",
 		"baseUrl": ".",
 		"paths": {
-			"$/*": ["./src/*"],
+			"$*": ["./src/*"],
 			"$components/*": ["./src/components/*"],
 			"$layouts/*": ["./src/layouts/*"],
 			"$lib/*": ["./src/lib/*"],

@@ -6,6 +6,8 @@ interface Props {
 	variant?: NonNullable<Parameters<typeof buttonVariants>[0]>["variant"];
 	size?: NonNullable<Parameters<typeof buttonVariants>[0]>["size"];
 	as?: string;
+	id?: string;
+	asChild?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
@@ -14,7 +16,7 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-	<component :is="as" :class="cn(buttonVariants({ variant, size }), $attrs.class ?? '')">
+	<component :is="as" :class="cn(buttonVariants({ variant, size }), $attrs.class ?? '')" :id="id">
 		<slot />
 	</component>
 </template>
