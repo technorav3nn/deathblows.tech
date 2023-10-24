@@ -3,9 +3,9 @@ import "$styles/tailwind.css";
 import "$styles/global.css";
 import "$styles/keyframes.css";
 import Header from "$components/sections/header.astro";
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 import { ViewTransitions } from "astro:transitions";
 import { SEO, type Props as SeoProps } from "astro-seo";
-import { slideFade } from "$lib/transitions";
 
 type Props = SeoProps;
 ---
@@ -18,6 +18,10 @@ type Props = SeoProps;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<!-- fonts -->
+		<GoogleFontsOptimizer
+			url="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		/>
 		<!-- view transitions -->
 		<ViewTransitions fallback="none" />
 		<!-- seo -->
